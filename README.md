@@ -8,7 +8,9 @@
 - Changed the theme setting in local storage to be forcibly set to dark on startup (fixed an issue with it defaulting to system and breaking) in src/components/ThemeSwitcher.js 
 - Updated package-lock to use the proper axios version and have cross-env (even though it already had the axios version in there? didn't work before idk)
 - Made a dockerfile and a .dockerignore
-
+- Updated `src/sources/Sources.ts` to point to cubari.gabjimmy.com instead of cubari.moe
+- Updated CNAME file in public
+- Updated `src/utils/compatibility.js` to have cubari.gabjimmy.com instead of cubari.moe
 
 ## Deploying
 To host this yourself, you just need to build the docker image and deploy it.
@@ -23,7 +25,14 @@ to push it to ghcr:
 docker push ghcr.io/thelingo1/cubari:latest
 ```
 
-## Proxy Services
+## Reader
+This is just the front end to search for manga from other websites, the series pages and reader is on cubari.moe (cubari.gabjimmy.com in my case)
+
+If you want to host the reader as well, clone my other repo with the reader (also forked from subject-f) and build the docker image + host it.
+
+Then just update the cubari.moe links in `src/sources/Sources.ts` and `src/utils/compatibility.js` to point to your self-hosted cubari.moe.
+
+## Troubleshooting Proxy Services
 If nothing loads and instead you see the loading circle spinning forever, this is most likely due to the proxy service (a self hosted one I use at cubari-proxy-services.gabjimmy.com) not allowing the request (CORS origin). 
 
 To fix this you will have to host the proxy service yourself.
