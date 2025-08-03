@@ -4,10 +4,10 @@
 
 export const mangaUrlBuilder = (url) => {
   return () => {
-    return url && url.startsWith("/") ? `https://cubari.moe${url}` : url;
+    return url && url.startsWith("/") ? `https://cubari.gabjimmy.com${url}` : url;
   };
 };
 
 export const mangaUrlSaver = (url) => {
-  return (url || "").replace("https://cubari.moe", "");
+  return (url || "").replace("https://cubari.gabjimmy.com", "");
 };

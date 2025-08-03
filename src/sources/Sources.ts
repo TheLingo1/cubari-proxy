@@ -11,7 +11,7 @@ const nsfwSourceMap: RawSourceMap = {
     state: {
       languages: "english",
     },
-    slugMapper: (slug) => `https://cubari.moe/read/nhentai/${slug}/`,
+    slugMapper: (slug) => `https://cubari.gabjimmy.com/read/nhentai/${slug}/`,
   },
   MangaDex: {
     user: "funkyhippo",
@@ -21,7 +21,7 @@ const nsfwSourceMap: RawSourceMap = {
     state: {
       ratings: ["pornographic"],
     },
-    slugMapper: (slug) => `https://cubari.moe/read/mangadex/${slug}/`,
+    slugMapper: (slug) => `https://cubari.gabjimmy.com/read/mangadex/${slug}/`,
   },
 };
 
@@ -48,7 +48,7 @@ const sfwSourceMap: RawSourceMap = {
     commit: "7108837f179b5de7ba08cf0f187c0691e4704d3b",
     filePath: "primary/MangaDex",
     state: {},
-    slugMapper: (slug) => `https://cubari.moe/read/mangadex/${slug}/`,
+    slugMapper: (slug) => `https://cubari.gabjimmy.com/read/mangadex/${slug}/`,
   },
   WeebCentral: {
     user: "Einlion",
@@ -56,7 +56,7 @@ const sfwSourceMap: RawSourceMap = {
     commit: "9b2c95cba5ef5fccc8c4771c033ec9592a97760b",
     filePath: "0.8/WeebCentral",
     state: {},
-    slugMapper: (slug) => `https://cubari.moe/read/weebcentral/${slug}/`,
+    slugMapper: (slug) => `https://cubari.gabjimmy.com/read/weebcentral/${slug}/`,
   },
   MangaKatana: {
     user: "TheNetsky",
@@ -65,7 +65,7 @@ const sfwSourceMap: RawSourceMap = {
     filePath: "0.8/MangaKatana",
     state: {},
     slugMapper: (slug) =>
-      `https://cubari.moe/mk/https://mangakatana.com/manga/${slug}/`,
+      `https://cubari.gabjimmy.com/mk/https://mangakatana.com/manga/${slug}/`,
   },
   AssortedScans: {
     user: "mangadventure",
@@ -74,7 +74,7 @@ const sfwSourceMap: RawSourceMap = {
     filePath: "AssortedScans",
     state: {},
     slugMapper: (slug) =>
-      `https://cubari.moe/ma/https://assortedscans.com/reader/${slug}/`
+      `https://cubari.gabjimmy.com/ma/https://assortedscans.com/reader/${slug}/`
   },
 };
 
