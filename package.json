@@ -14,8 +14,10 @@
     "@types/node": "^14.14.37",
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.3",
+    "axios": "0.21.4",
     "buffer": "^6.0.3",
     "cheerio": "^1.0.0-rc.12",
+    "cross-env": "^10.0.0",
     "gitlog": "^4.0.4",
     "immutability-helper": "^3.1.1",
     "js-base64": "^3.7.2",
@@ -29,8 +31,8 @@
     "remotestoragejs": "^1.2.3"
   },
   "scripts": {
-    "start": "GENERATE_SOURCEMAP=false react-scripts start",
-    "build": "GENERATE_SOURCEMAP=false react-scripts build",
+    "start": "cross-env GENERATE_SOURCEMAP=false react-scripts start",
+    "build": "cross-env GENERATE_SOURCEMAP=false react-scripts build",
     "winBuild": "set \"GENERATE_SOURCEMAP=false \" && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

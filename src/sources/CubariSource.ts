@@ -7,15 +7,18 @@ const UNSAFE_HEADERS = new Set(["cookie", "user-agent", "referer"]);
 
 const requestInterceptor = (req: AxiosRequestConfig) => {
   if (!("retried" in req)) {
+    console.log("Intercepted: ", req);
     req.url = `${PROXY_URL}/v1/cors/${base64UrlEncode(
       req.url + (req.params ?? "")
-    )}?source=proxy_cubari_moe`;
+    )}?source=cubari_gabjimmy_com`;
   }
+  console.log("Headers: ", req);
   Object.keys(req.headers).forEach((header) => {
     if (UNSAFE_HEADERS.has(header.toLowerCase())) {
       delete req.headers[header];
     }
   });
+  req.headers["X-Requested-With"] = "cubari.gabjimmy.com";
   return req;
 };
 
@@ -59,10 +62,10 @@ export function CubariSourceMixin<TBase extends Constructor>(
           
           // extension lib will still attempt to set forbidden headers, 
           // we can override that fn as well but browsers already attempt to block this
-          request.headers = {}
+          request.headers = {"X-Requested-With": "cubari.gabjimmy.com"}
           request.url = `${PROXY_URL}/v1/cors/${base64UrlEncode(
             request.url + (request.param ?? "")
-          )}?source=proxy_cubari_moe`;
+          )}?source=cubari_gabjimmy_com`;
           return request;
         },
         interceptResponse: async (response) => {

@@ -3,7 +3,7 @@ import * as cheerio from 'cheerio';
 import { Base64 } from "js-base64";
 import { CubariSource, State } from "./types";
 
-const PROXY_URL = "https://services.f-ck.me";
+const PROXY_URL = "https://cubari-proxy-services.gabjimmy.com";
 
 const IMAGE_RESIZE_URL = "https://resizer.f-ck.me";
 
@@ -73,7 +73,7 @@ const base64UrlEncode = (s: string): string => {
 const convertImageUrl = (originalUrl: string): string => {
   return `${PROXY_URL}/v1/image/${base64UrlEncode(
     originalUrl
-  )}?source=proxy_cubari_moe`;
+  )}?source=cubari_gabjimmy_com`;
 };
 
 const resizedImageUrl = (url: string, queryParams: string): string => {

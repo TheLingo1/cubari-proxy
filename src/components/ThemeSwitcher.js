@@ -13,8 +13,10 @@ const themes = {
 export default class ThemeSwitcher extends PureComponent {
   constructor(props) {
     super(props);
+    window.localStorage.setItem("theme", "dark"); // setting to dark by default bc mine was broken for some reason and set to system
     let theme = window.localStorage.getItem("theme");
     if (!theme) {
+      theme = "dark";
       window.localStorage.setItem("theme", "dark");
     }
     this.state = {
