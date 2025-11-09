@@ -85,23 +85,32 @@ export default class InfoModal extends PureComponent {
                     <Section text="About" />
                     <Container>
                       <Dialog.Description>
-                        While this project is related to{" "}
+                        This is a modified version of{" "}
                         <a
                           className="text-blue-500 hover:text-blue-600"
-                          href="https://cubari.moe/"
+                          href="https://proxy.cubari.moe/"
                         >
-                          cubari.moe
+                          proxy.cubari.moe
+                        </a> with changes that made self hosting (personally) easier.<br /><br />Find the source code and changes that worked for me{" "}
+                        <a
+                          className="text-blue-500 hover:text-blue-600"
+                          href="https://www.github.com/TheLingo1/cubari-proxy/"
+                        >
+                          here
                         </a>
-                        , it should be considered distinct (and will evolve
-                        independently of the main website).
-                        <br></br>
-                        Sources that have decent readers and/or no ads may be
-                        included.
                       </Dialog.Description>
                     </Container>
                     <Section text="Credits" />
                     <Container>
                       <Dialog.Description>
+                        Original code from subject-f.{" "}
+                        <a
+                          className="text-blue-500 hover:text-blue-600"
+                          href="https://github.com/subject-f/cubari-proxy/"
+                        >
+                          Link
+                        </a><br/ ><br />
+
                         All sources are powered by Paperback's extensions.{" "}
                         <a
                           className="text-blue-500 hover:text-blue-600"
@@ -114,7 +123,7 @@ export default class InfoModal extends PureComponent {
                     <Section text="Discord" />
                     <Container>
                       <Dialog.Description>
-                        Got suggestions? Either send us a message through the
+                        Got suggestions?<br/ ><strong>For this fork:</strong> put in a github issue<br/ ><strong>For the original project:</strong><br /> Either send us a message through the
                         chat icon or{" "}
                         <a
                           className="text-blue-500 hover:text-blue-600"
@@ -139,7 +148,7 @@ export default class InfoModal extends PureComponent {
                     </Container>
                   </div>
                   <button
-                    className="mt-10 bg-transparent text-black hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                    className="mt-1 bg-transparent text-black hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                     onClick={this.setIsOpen(false)}
                   >
                     Cool

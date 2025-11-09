@@ -10,6 +10,8 @@ const nsfwSourceMap: RawSourceMap = {
     filePath: "0.8/NHentai",
     state: {
       languages: "english",
+      extra_args: "",
+      
     },
     slugMapper: (slug) => `https://cubari.gabjimmy.com/read/nhentai/${slug}/`,
   },

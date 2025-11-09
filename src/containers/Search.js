@@ -21,6 +21,7 @@ export default class Search extends PureComponent {
     if (event.key === "Enter" && event.target.value) {
       let query = {
         title: event.target.value,
+        includedTags: [],
       };
       this.runningQueries.clear();
       this.props.searchHandler("", {});
