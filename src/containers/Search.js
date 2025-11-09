@@ -75,7 +75,7 @@ export default class Search extends PureComponent {
             this.runningQueries.delete(queryTask);
             this.setState({
                 searching: this.runningQueries.size ? true : false,
-                hasMoreSources: {
+                sourcesWithMore: {
                     ...this.state.sourcesWithMore,
                     [sourceName]: {
                         query: queryTask.query,
