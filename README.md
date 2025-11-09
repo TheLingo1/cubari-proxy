@@ -28,7 +28,7 @@ docker push ghcr.io/thelingo1/cubari:latest
 ## Reader
 This is just the front end to search for manga from other websites, the series pages and reader is on cubari.moe (cubari.gabjimmy.com in my case)
 
-If you want to host the reader as well, clone my other repo with the reader (also forked from subject-f) and build the docker image + host it.
+If you want to host the reader as well, clone `TheLingo1/cubarimoe` with the reader (also forked from subject-f) and build the docker image + host it.
 
 Then just update the cubari.moe links in `src/sources/Sources.ts` and `src/utils/compatibility.js` to point to your self-hosted cubari.moe.
 
