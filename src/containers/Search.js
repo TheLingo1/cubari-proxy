@@ -12,6 +12,7 @@ export default class Search extends PureComponent {
     super(props);
     this.state = {
       searching: false,
+      sourcesWithMore: {},
     };
     this.inputRef = React.createRef();
     this.runningQueries = new Set();
@@ -21,6 +22,7 @@ export default class Search extends PureComponent {
     if (event.key === "Enter" && event.target.value) {
       let query = {
         title: event.target.value,
+        includedTags: [],
       };
       this.runningQueries.clear();
       this.props.searchHandler("", {});
@@ -36,8 +38,7 @@ export default class Search extends PureComponent {
   };
 
   sourceQueryHelper = (sourceName, source, queryTask) => {
-    // TODO consider limiting the returned results, which means we need to pass
-    // an async callback to the carousel to load more if we're near the end
+    // Returned results are limited, and further loading is done when near the end of the carosel.
     this.runningQueries.add(queryTask);
     let hasMore = false;
     source
@@ -70,16 +71,47 @@ export default class Search extends PureComponent {
       .finally(() => {
         if (this.runningQueries.has(queryTask) && this.inputRef.current) {
           if (hasMore) {
-            this.sourceQueryHelper(sourceName, source, queryTask);
+            this.runningQueries.delete(queryTask);
+            this.setState({
+                searching: this.runningQueries.size ? true : false,
+                sourcesWithMore: {
+                    ...this.state.sourcesWithMore,
+                    [sourceName]: {
+                        query: queryTask.query,
+                        metadata: queryTask.metadata,
+                        hasMore
+                    },
+                }
+            });
           } else {
             this.runningQueries.delete(queryTask);
             this.setState({
               searching: this.runningQueries.size ? true : false,
             });
           }
+          if (queryTask.onComplete) {
+            queryTask.onComplete();
+          }
         }
       });
   };
+
+  loadMoreFromSource = async (sourceName) => {
+    const source = this.props.sources[sourceName];
+    const sourceData = this.state.sourcesWithMore[sourceName];
+    const queryTask = {
+      source,
+      query: sourceData.query,
+      metadata: sourceData.metadata,
+    };
+
+    this.setState({ searching: true });
+
+    return new Promise((resolve) => {
+      queryTask.onComplete = resolve;
+       this.sourceQueryHelper(sourceName, source, queryTask);
+    });
+  }
 
   runSearchQuery = (query) => {
     Object.entries(this.props.sources).forEach(([sourceName, source]) => {
@@ -106,6 +138,7 @@ export default class Search extends PureComponent {
   render() {
     const items = [];
     Object.entries(this.props.searchResults).forEach(([source, results]) => {
+      let hasMoreInSource = this.state.sourcesWithMore[source]?.hasMore;
       if (results && results.length) {
         items.push(
           <Section
@@ -118,7 +151,13 @@ export default class Search extends PureComponent {
           />
         );
         items.push(
-          <ScrollableCarousel key={`search-${source}-carousel`} expandable={true}>
+          <ScrollableCarousel 
+          key={`search-${source}-carousel`} 
+          expandable={true} 
+          onReachEnd={
+              hasMoreInSource ? async () => await this.loadMoreFromSource(source) : undefined
+            }
+          >
             {results.map((item) => (
               <MangaCard
                 key={"search-" + source.name + (item.slug)}

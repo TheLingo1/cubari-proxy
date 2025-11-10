@@ -22,6 +22,7 @@ export default class ScrollableCarousel extends PureComponent {
       childrenLength: 0,
       itemLength: 0,
       expanded: false,
+      loadingMore: false,
     };
     // While a shared observer would be preferable, we lose
     // the virtual DOM context here so we'll instead bind it
@@ -59,6 +60,14 @@ export default class ScrollableCarousel extends PureComponent {
         this.setState({
           itemLength: this.state.itemLength + LOAD_BATCH_COUNT,
         });
+        if(this.state.itemLength + LOAD_BATCH_COUNT >= this.state.childrenLength &&
+          this.props.onReachEnd &&
+          !this.state.loadingMore) {
+          this.setState( {loadingMore: true});
+          Promise.resolve(this.props.onReachEnd()).finally(() => {
+            this.setState({ loadingMore: false });
+          });
+        }
       } else {
         this.setState({
           fullyLeftScrolled,
@@ -220,17 +229,23 @@ export default class ScrollableCarousel extends PureComponent {
             "absolute select-none -right-2 top-1/2 transform -translate-y-1/2 z-10 transition-all duration-250"
           )}
         >
-          <div
-            className="cursor-pointer  bg-gray-900 text-white dark:bg-white dark:text-black rounded-full p-2 shadow-2xl transform scale-95 hover:scale-100 opacity-40 sm:opacity-80 hover:opacity-100 transition-opacity transition-transform duration-250"
-            onClick={this.scrollRight}
-            onMouseEnter={this.onMouseEnter}
-            onMouseLeave={this.onMouseLeave}
-          >
-            <ArrowRightIcon
-              className={`rounded-full z-10 p-0 w-${iconSize} h-${iconSize}`}
-              aria-hidden="true"
-            />
-          </div>
+          {this.state.loadingMore ? (
+            <div className="flex items-center justify-center p-4">
+              <Spinner />
+            </div>
+          ) : (
+            <div
+              className="cursor-pointer  bg-gray-900 text-white dark:bg-white dark:text-black rounded-full p-2 shadow-2xl transform scale-95 hover:scale-100 opacity-40 sm:opacity-80 hover:opacity-100 transition-opacity transition-transform duration-250"
+              onClick={this.scrollRight}
+              onMouseEnter={this.onMouseEnter}
+              onMouseLeave={this.onMouseLeave}
+            >
+              <ArrowRightIcon
+                className={`rounded-full z-10 p-0 w-${iconSize} h-${iconSize}`}
+                aria-hidden="true"
+              />
+            </div>
+          )}
         </div>
         <div>
           {expandable && !(fullyLeftScrolled && fullyRightScrolled) ? (
